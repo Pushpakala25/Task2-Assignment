@@ -1,0 +1,52 @@
+﻿
+@using PagedList.Mvc
+@model  PagedList.IPagedList<OptiMice_Assign.Models.Blog>
+@{
+    ViewBag.Title = "AdminDisplayAdd";
+}
+
+@*<h2>DisplayAdd</h2>*@
+
+<div class="container" style="padding: 45px 0;">
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+
+                <div class="col-md-4">
+                    <img src="@Url.Content(item.b_img)" style="height:250px;width:100%; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);" />
+                    <br />
+                    <h4 style="color: black;font-family:'poppins';text-align:center;">
+                        @Html.ActionLink(@item.b_author, "AdminViewAdds", new { id = item.b_id })
+                    </h4>
+                    <br />
+                    <div class="deleteddd" style="text-align:center;">
+                        @Html.ActionLink("Edit", "EditC", new { id = item.b_id }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Delete", "DeleteC", new { id = item.b_id }, new { @class = "btn btn-danger btn-sm" })
+                    </div>
+                    <br />
+                </div>
+            }
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4" style="text-align: center;">
+            <div class="pagination">
+                Page @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)
+                of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("DisplayAdd", new { page }))
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

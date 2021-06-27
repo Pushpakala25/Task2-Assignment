@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Opty_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="ad_id" />
+    </Key>
+    <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Blogs" Relationship="Self.FK__Blog__b_adm_id_f__5812160E" FromRole="admin" ToRole="Blog" />
+    <NavigationProperty Name="categories" Relationship="Self.FK__category__ad_id___4E88ABD4" FromRole="admin" ToRole="category" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="b_id" />
+    </Key>
+    <Property Name="b_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="b_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="b_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="b_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_id_fk" Type="Int32" />
+    <Property Name="b_adm_id_fk" Type="Int32" />
+    <NavigationProperty Name="admin" Relationship="Self.FK__Blog__b_adm_id_f__5812160E" FromRole="Blog" ToRole="admin" />
+    <NavigationProperty Name="category" Relationship="Self.FK__Blog__cat_id_fk__571DF1D5" FromRole="Blog" ToRole="category" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_id_fk" Type="Int32" />
+    <Property Name="cat_statuss" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="admin" Relationship="Self.FK__category__ad_id___4E88ABD4" FromRole="category" ToRole="admin" />
+    <NavigationProperty Name="Blogs" Relationship="Self.FK__Blog__cat_id_fk__571DF1D5" FromRole="category" ToRole="Blog" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_usr">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="u_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Blog__b_adm_id_f__5812160E">
+    <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+    <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="b_adm_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__category__ad_id___4E88ABD4">
+    <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+    <End Role="category" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="ad_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Blog__cat_id_fk__571DF1D5">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="cat_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Opty_dbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="Blogs" EntityType="Self.Blog" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_usr" EntityType="Self.tbl_usr" />
+    <AssociationSet Name="FK__Blog__b_adm_id_f__5812160E" Association="Self.FK__Blog__b_adm_id_f__5812160E">
+      <End Role="admin" EntitySet="admins" />
+      <End Role="Blog" EntitySet="Blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__category__ad_id___4E88ABD4" Association="Self.FK__category__ad_id___4E88ABD4">
+      <End Role="admin" EntitySet="admins" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Blog__cat_id_fk__571DF1D5" Association="Self.FK__Blog__cat_id_fk__571DF1D5">
+      <End Role="category" EntitySet="categories" />
+      <End Role="Blog" EntitySet="Blogs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

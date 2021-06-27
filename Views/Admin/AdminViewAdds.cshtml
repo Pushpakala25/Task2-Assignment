@@ -1,0 +1,45 @@
+﻿
+@model OptiMice_Assign.Models.ad_view_model
+@{
+    ViewBag.Title = "AdminViewAdds";
+}
+
+@*<h2>AdminViewAdds</h2>*@
+
+<div class="AVA-8" style="font-family: poppins; text-align: center;">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <img src="" class="img-circle img-responsive" />
+        </div>
+
+        <div class="col-lg-12 col-md-12 ">
+
+            <div>
+                <h1>@Model.b_author @*<small>Ad-ID:@Model.pro_id</small>*@</h1>
+            </div>
+            <img src="@Url.Content(@Model.b_img)" style="height:250px; width:40%;  border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);" />
+
+            <table class="table-bordered table-responsive table-hover">
+                <tr><td><h3>Category Name : </h3></td><td>@Model.cat_name</td></tr>
+                <tr><td><h3>Title :</h3></td><td>@Model.b_title</td></tr>
+                <tr><td><h3>Content :</h3></td><td>@Model.b_content</td></tr>
+                <tr>
+                    <td colspan="2">
+                        @if (Convert.ToInt32(Session["ad_id"]) == Convert.ToInt32(Model.b_adm_id_fk))
+                        {
+                            @Html.ActionLink("Remove", "Ad_Delete", new { id = Model.b_id }, new { @class = "btn btn-danger btn-sm" })
+                        }
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+        </div>
+
+    </div>
+    
+
+</div>
+

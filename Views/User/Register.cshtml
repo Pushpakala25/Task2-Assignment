@@ -1,0 +1,92 @@
+﻿@model OptiMice_Assign.Models.tbl_usr
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="reg-h">
+
+    <div class="row ">
+
+        <div class="col-lg-3">
+        </div>
+
+        <div class="col-lg-6">
+            <div class="r-col">
+                @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <br />
+                    <div class="form-horizontal">
+                        <div class="forms-in">
+                            <div class="regF-h">
+                                <h4>Welcome User</h4>
+                            </div>
+                            <hr />
+                            @*<div class="imgcontainer">
+                                <img src="~/img/Admin_Img/reg.png" alt="Avatar" class="avatar">
+                            </div>*@
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.u_name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.u_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Name" } })
+                                    @Html.ValidationMessageFor(model => model.u_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.u_password, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.u_password, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Password" } })
+                                    @Html.ValidationMessageFor(model => model.u_password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.u_contact, "Mobile", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.u_contact, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mobile No" } })
+                                    @Html.ValidationMessageFor(model => model.u_contact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.u_email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.u_email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email ID" } })
+                                    @Html.ValidationMessageFor(model => model.u_email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Register" class="btn btn-success btn-block" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @*<div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>*@
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

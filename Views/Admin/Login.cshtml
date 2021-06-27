@@ -1,0 +1,80 @@
+﻿@model OptiMice_Assign.Models.admin
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+
+<div class="login-h">
+
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+
+        <div class="col-lg-6">
+            <div class="a-col">
+                @using (Html.BeginForm())
+                {
+                    <form class="" action="" method="post">
+
+                        <div class="hhh">
+                            <h2>ADMIN LOGIN</h2>
+                        </div>
+                        <hr />
+
+                        @*<div class="imgcontainer">
+                            <img src="~/img/Admin_Img/263-2636795_admin-login-angel-tube-station.png" alt="Avatar" class="avatar">
+                        </div>
+                        <br />*@
+
+                        <div class="form-horizontal">
+                            <div class="form-in">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ad_name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @*<label for="uname"><b>Username</b></label>*@
+                                    <div class="col-md-10">
+                                        @*<input type="text" placeholder="Enter Username" name="uname" required>*@
+                                        @Html.TextBoxFor(model => model.ad_name, new { @class = "form-control", @placeholder = "Admin Username" })
+                                        @Html.ValidationMessageFor(model => model.ad_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ad_password, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @*<label for="psw"><b>Password</b></label>*@
+                                    <div class="col-md-10">
+
+                                        @*<input type="password" placeholder="Enter Password" name="psw" required>*@
+                                        @Html.PasswordFor(model => model.ad_password, new { @class = "form-control", @placeholder = "Enter Password" })
+                                        @Html.ValidationMessageFor(model => model.ad_password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Login" class="btn btn-success btn-block" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <p style="color :red;"> @ViewBag.error</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
